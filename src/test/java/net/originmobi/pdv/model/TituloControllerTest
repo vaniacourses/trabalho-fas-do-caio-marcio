@@ -1,0 +1,150 @@
+package net.originmobi.pdv.controller;
+
+import static org.junit.Assert.*;
+
+import net.originmobi.pdv.model.Titulo;
+import net.originmobi.pdv.model.TituloTipo;
+import net.originmobi.pdv.model.cartao.MaquinaCartao;
+import net.originmobi.pdv.service.TituloService;
+import net.originmobi.pdv.service.TituloTipoService;
+import net.originmobi.pdv.service.cartao.MaquinaCartaoService;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.validation.BeanPropertyBindingResult;
+import org.springframework.validation.Errors;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@DisplayName("Classe para teste do TituloController")
+public class TituloControllerTest {
+
+    private TituloController controller;
+
+    private TituloService tituloServiceMock;
+    private TituloTipoService tipoServiceMock;
+    private MaquinaCartaoService maquinaServiceMock;
+
+    @Before
+    public void setUp() {
+        // Mocks simples (substitua por Mockito se quiser depois)
+        tituloServiceMock = new TituloService() {
+            @Override
+            public List<Titulo> lista() {
+                List<Titulo> titulos = new ArrayList<>();
+                titulos.add(new Titulo());
+                return titulos;
+            }
+
+            @Override
+            public void cadastro(Titulo titulo) {
+                // Simula cadastro
+            }
+
+            @Override
+            public String remover(Long codigo) {
+                return "Removido";
+            }
+        };
+
+        tipoServiceMock = new TituloTipoService() {
+            @Override
+            public List<TituloTipo> lista() {
+                return List.of(new TituloTipo());
+            }
+        };
+
+        maquinaServiceMock = new MaquinaCartaoService() {
+            @Override
+            public List<MaquinaCartao> lista() {
+                return List.of(new MaquinaCartao());
+            }
+        };
+
+        controller = new TituloController();
+
+        // Injeta os mocks manualmente
+        controller.titulos = tituloServiceMock;
+        controller.tipos = tipoServiceMock;
+        controller.maquinas = maquinaServiceMock;
+    }
+
+    @DisplayName("Teste do método lista()")
+    @Test
+    public void testLista() {
+        ModelAndView mv = controller.lista();
+        assertEquals("titulo/list", mv.getViewName());
+        assertNotNull(mv.getModel().get("titulos"));
+    }
+
+    @DisplayName("Teste do método form()")
+    @Test
+    public void testForm() {
+        ModelAndView mv = controller.form();
+        assertEquals("titulo/form", mv.getViewName());
+        assertTrue(mv.getModel().get("titulo") instanceof Titulo);
+    }
+
+    @DisplayName("Teste do método cadastrar() com erros de validação")
+    @Test
+    public void testCadastrarComErro() {
+        Titulo titulo = new Titulo(); // vazio, simula erro
+        Errors errors = new BeanPropertyBindingResult(titulo, "titulo");
+        errors.rejectValue("campo", "erro");
+
+        String view = controller.cadastrar(titulo, errors, null);
+        assertEquals("titulo/form", view);
+    }
+
+    @DisplayName("Teste do método cadastrar() com sucesso")
+    @Test
+    public void testCadastrarSucesso() {
+        Titulo titulo = new Titulo(); // assume que está válido
+        Errors errors = new BeanPropertyBindingResult(titulo, "titulo");
+
+        RedirectAttributes attrs = new RedirectAttributes() {
+            // você pode simular esse comportamento se necessário
+        };
+
+        String view = controller.cadastrar(titulo, errors, attrs);
+        assertEquals("redirect:/titulos", view);
+    }
+
+    @DisplayName("Teste do método editar()")
+    @Test
+    public void testEditar() {
+        Titulo titulo = new Titulo();
+        titulo.setCodigo(1L);
+
+        ModelAndView mv = controller.editar(titulo);
+        assertEquals("titulo/form", mv.getViewName());
+        assertEquals(titulo, mv.getModel().get("titulo"));
+    }
+
+    @DisplayName("Teste do método excluir()")
+    @Test
+    public void testExcluir() {
+        String result = controller.excluir(1L);
+        assertEquals("Removido", result);
+    }
+
+    @DisplayName("Teste do @ModelAttribute tipos()")
+    @Test
+    public void testTipos() {
+        List<TituloTipo> tipos = controller.tipos();
+        assertNotNull(tipos);
+        assertFalse(tipos.isEmpty());
+    }
+
+    @DisplayName("Teste do @ModelAttribute maquinas()")
+    @Test
+    public void testMaquinas() {
+        List<MaquinaCartao> maquinas = controller.maquinas();
+        assertNotNull(maquinas);
+        assertFalse(maquinas.isEmpty());
+    }
+}
