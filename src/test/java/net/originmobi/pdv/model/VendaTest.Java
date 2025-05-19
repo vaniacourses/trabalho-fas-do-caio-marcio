@@ -1,13 +1,13 @@
 package net.originmobi.pdv.model;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.Collections;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
 import net.originmobi.pdv.enumerado.VendaSituacao;
 
