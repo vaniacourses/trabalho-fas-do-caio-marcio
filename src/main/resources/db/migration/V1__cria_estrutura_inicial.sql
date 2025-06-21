@@ -851,7 +851,7 @@ CREATE TABLE IF NOT EXISTS `pdv`.`receber` (
   `data_cadastro` DATETIME NOT NULL,
   `data_alteracao` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '				',
   `venda_codigo` INT(11) NOT NULL,
-  PRIMARY KEY (`codigo`, `venda_codigo`),
+  PRIMARY KEY (`codigo`),
   INDEX `fk_Receber_pessoa1_idx` (`pessoa_codigo` ASC),
   INDEX `fk_receber_venda1_idx` (`venda_codigo` ASC),
   CONSTRAINT `fk_Receber_pessoa1`
@@ -1109,7 +1109,7 @@ CREATE TABLE IF NOT EXISTS `pdv`.`nota_fiscal` (
   `frete_tipo_codigo` INT(11) NOT NULL,
   `finalidade_codigo` INT(11) NOT NULL,
   `tipo_ambiente` INT NULL,
-  PRIMARY KEY (`codigo`, `totais_codigo`),
+  PRIMARY KEY (`codigo`),
   UNIQUE INDEX `chave_acesso_UNIQUE` (`chave_acesso` ASC),
   INDEX `fk_nota_fiscal_empresa1_idx` (`emissor_codigo` ASC),
   INDEX `fk_nota_fiscal_pessoa1_idx` (`destinatario_codigo` ASC),
@@ -1190,67 +1190,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `pdv`.`nota_fiscal`
+-- Table `pdv`.`nota_fiscal` ***DELETADO - TABELA DUPLICADA***
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `pdv`.`nota_fiscal` (
-  `codigo` INT(11) NOT NULL AUTO_INCREMENT,
-  `numero` INT(11) NOT NULL,
-  `modelo` INT NOT NULL,
-  `tipo` VARCHAR(8) NOT NULL,
-  `chave_acesso` VARCHAR(50) NULL,
-  `natureza_operacao` VARCHAR(255) NOT NULL,
-  `serie` INT NOT NULL,
-  `situacao` VARCHAR(45) NULL,
-  `emissor_codigo` INT(11) NOT NULL,
-  `destinatario_codigo` INT(11) NOT NULL,
-  `data_emissao` DATE NULL,
-  `data_saida` DATE NULL,
-  `hora_saida` TIME NULL,
-  `data_alteracao` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `data_cadastro` DATE NOT NULL,
-  `tipo_emissao` INT NULL,
-  `totais_codigo` INT(11) NOT NULL,
-  `tipo_impressao` INT NULL,
-  `cDV` VARCHAR(45) NULL,
-  `procEmi` INT NULL,
-  `verProc` VARCHAR(255) NULL,
-  `frete_tipo_codigo` INT(11) NOT NULL,
-  `finalidade_codigo` INT(11) NOT NULL,
-  `tipo_ambiente` INT NULL,
-  PRIMARY KEY (`codigo`, `totais_codigo`),
-  UNIQUE INDEX `chave_acesso_UNIQUE` (`chave_acesso` ASC),
-  INDEX `fk_nota_fiscal_empresa1_idx` (`emissor_codigo` ASC),
-  INDEX `fk_nota_fiscal_pessoa1_idx` (`destinatario_codigo` ASC),
-  INDEX `fk_nota_fiscal_nota_fiscal_totais1_idx` (`totais_codigo` ASC),
-  INDEX `fk_nota_fiscal_nota_fiscal_frete1_idx` (`frete_tipo_codigo` ASC),
-  INDEX `fk_nota_fiscal_nota_fiscal_finalidade1_idx` (`finalidade_codigo` ASC),
-  CONSTRAINT `fk_nota_fiscal_empresa10`
-    FOREIGN KEY (`emissor_codigo`)
-    REFERENCES `pdv`.`empresa` (`codigo`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_nota_fiscal_pessoa10`
-    FOREIGN KEY (`destinatario_codigo`)
-    REFERENCES `pdv`.`pessoa` (`codigo`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_nota_fiscal_nota_fiscal_totais1`
-    FOREIGN KEY (`totais_codigo`)
-    REFERENCES `pdv`.`nota_fiscal_totais` (`codigo`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_nota_fiscal_nota_fiscal_frete1`
-    FOREIGN KEY (`frete_tipo_codigo`)
-    REFERENCES `pdv`.`frete_tipo` (`codigo`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_nota_fiscal_nota_fiscal_finalidade1`
-    FOREIGN KEY (`finalidade_codigo`)
-    REFERENCES `pdv`.`nota_fiscal_finalidade` (`codigo`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-COMMENT = 'tipo_emissao é pra tag tpEmis e pode ter os seguintes valores: 1 - Normal, 2 - contigência, 3';
+
 
 
 -- -----------------------------------------------------

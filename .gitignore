@@ -1,16 +1,10 @@
-# Compiled class file
-*.class
+# ==================================
+# Arquivos de Dependências e Build
+# ==================================
+# Build output
+/target/
 
-# Log file
-*.log
-
-# BlueJ files
-*.ctxt
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
+# Package Files
 *.jar
 *.war
 *.nar
@@ -19,6 +13,28 @@
 *.tar.gz
 *.rar
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# ==================================
+# Arquivos do Sistema e IDEs
+# ==================================
+# virtual machine crash logs
 hs_err_pid*
-/target/
+
+# Eclipse
+.project
+.classpath
+.settings/
+
+# VS Code
+.vscode/
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/

@@ -1,0 +1,76 @@
+# Configuração do Ambiente de Desenvolvimento
+
+1. Clonar o Repositório
+git clone https://github.com/vaniacourses/trabalho-fas-do-caio-marcio.git
+
+2. Configurar o Banco de Dados
+
+2.1. Conecte-se à sua instância do MySQL com um cliente de sua preferência e execute o script abaixo: 
+
+CREATE DATABASE IF NOT EXISTS pdv CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE USER IF NOT EXISTS 'pdv'@'localhost' IDENTIFIED BY 'kate456';
+GRANT ALL PRIVILEGES ON pdv.* TO 'pdv'@'localhost';
+FLUSH PRIVILEGES;
+
+OBS: o passo anterior substitui os comandos do arquivo README.txt
+
+3. Configurar a Conexão da Aplicação
+
+No VS Code, abra o arquivo de configuração do projeto:
+src/main/resources/application.properties
+
+Encontre e altere as seguintes linhas para que a aplicação possa se conectar ao 
+banco de dados que você acabou de criar:
+
+spring.datasource.url=jdbc:mysql://localhost:3306/pdv?allowPublicKeyRetrieval=true&useSSL=false
+spring.datasource.username=pdv
+spring.datasource.password=kate456
+
+4. Executando a Aplicação
+
+4.1. Abra o terminal do VSCode (Ctrl + ')
+
+4.2. No terminal, aponte para a pasta raiz do projeto no seu computador: 
+cd "C:\trabalho-fas-do-caio-marcio"
+
+4.3. Execute o comando abaixo, substituindo o caminho pelo local exato do seu JDK 8.
+Importante: Este comando precisa ser executado uma vez toda vez que você abrir um novo terminal: 
+Ele define o JDK 8 apenas para a sessão atual.
+$env:JAVA_HOME = "C:\Program Files\Java\jdk-1.8"
+
+4.4. Inicie a aplicação usando o Maven Wrapper:
+.\mvnw spring-boot:run
+
+A aplicação estará pronta quando a mensagem Tomcat started on port(s): 8080 (http) aparecer.
+
+5. Abra no navegador
+http://localhost:8080/
+
+
+--------------------------------------------------------------------------------------------
+
+
+# Solução de Problemas Comuns (Troubleshooting)
+
+Se você encontrar erros ao executar a aplicação, veja os cenários comuns abaixo.
+
+Cenário 1: Erro ClassNotFoundException: ... MavenWrapperMain
+
+Causa: Os arquivos do "Maven Wrapper", que executa o projeto, estão faltando na sua pasta local.
+Solução: Certifique-se de ter o Apache Maven instalado em seu sistema. Depois, rode o comando 
+abaixo no terminal para que ele gere os arquivos faltantes:
+mvn wrapper:wrapper
+
+Após o sucesso, tente rodar a aplicação novamente com 
+.\mvnw spring-boot:run
+
+Cenário 2: Erro de Compilação com Invalid CEN header
+
+Causa: Uma das dependências (.jar) que o Maven baixou está corrompida no seu computador.
+Solução: O erro indicará o caminho do arquivo corrompido 
+(ex: C:\Users\SeuUsuario\.m2\repository\org\aspectj\aspectjweaver\...).
+Navegue até a pasta pai (neste exemplo, C:\Users\SeuUsuario\.m2\repository\org\).
+Delete a pasta da dependência com problema (neste exemplo, a pasta aspectj).
+
+Rode a aplicação novamente. O Maven será forçado a baixar uma cópia nova e funcional do arquivo.
+.\mvnw spring-boot:run
