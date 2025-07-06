@@ -1,17 +1,17 @@
 package net.originmobi.pdv.model;
 
-import static org.junit.Assert.*;
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 @DisplayName("Classe para teste do regime tributário")
 public class RegimeTributarioTest {
 
     private RegimeTributario regimeTributario;
 
-    @Before
-    public void inicializa() {
+    @BeforeEach
+    void inicializa() {
         regimeTributario = new RegimeTributario();
         regimeTributario.setCodigo(1L);
         regimeTributario.setDescricao("Simples Nacional");
