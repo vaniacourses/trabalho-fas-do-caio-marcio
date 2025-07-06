@@ -113,13 +113,11 @@
 
 	<build>
 		<plugins>
-			<!-- Plugin Spring Boot -->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 
-			<!-- Plugin JaCoCo (cobertura de testes) -->
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
@@ -140,7 +138,6 @@
 				</executions>
 			</plugin>
 
-			<!-- Plugin Surefire atualizado -->
 		   <plugin>
 			   <groupId>org.apache.maven.plugins</groupId>
 			   <artifactId>maven-surefire-plugin</artifactId>
