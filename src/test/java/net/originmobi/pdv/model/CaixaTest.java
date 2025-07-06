@@ -1,11 +1,16 @@
 package net.originmobi.pdv.model;
 
-import static org.junit.Assert.*;
-import org.junit.Before;
-import org.junit.Test;
 import java.sql.Timestamp;
 import java.util.Date;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 import net.originmobi.pdv.enumerado.caixa.CaixaTipo;
 
@@ -15,12 +20,9 @@ public class CaixaTest {
     private Caixa caixa;
     private Usuario usuario;
 
-    @Before
-    public void inicializa() {
-        usuario = new Usuario();
-        usuario.setCodigo(1L);
-        usuario.setUser("TestUser");
-        
+    @BeforeEach
+    void inicializa() {
+        usuario = org.mockito.Mockito.mock(Usuario.class);
         caixa = new Caixa();
         caixa.setCodigo(1L);
         caixa.setDescricao("Caixa Teste");
@@ -82,7 +84,7 @@ public class CaixaTest {
         assertEquals(valorFechamento, novoCaixa.getValor_fechamento());
         assertEquals(dataCadastro, novoCaixa.getData_cadastro());
         assertEquals(dataFechamento, novoCaixa.getData_fechamento());
-        assertEquals(usuario, novoCaixa.getUsuario());
+        assertSame(usuario, novoCaixa.getUsuario());
     }
 
     @DisplayName("Teste para verificar se os setters e getters funcionam")
@@ -90,19 +92,19 @@ public class CaixaTest {
     public void testSettersAndGetters() {
         String agencia = "1234";
         String conta = "56789";
-        
+
         caixa.setAgencia(agencia);
         caixa.setConta(conta);
-        
+
         assertEquals(agencia, caixa.getAgencia());
         assertEquals(conta, caixa.getConta());
 
         Double valorEntrada = 50.0;
         Double valorSaida = 30.0;
-        
+
         caixa.setValor_entrada(valorEntrada);
         caixa.setValor_saida(valorSaida);
-        
+
         assertEquals(valorEntrada, caixa.getValor_entrada());
         assertEquals(valorSaida, caixa.getValor_saida());
     }
@@ -113,4 +115,4 @@ public class CaixaTest {
         String expected = "Caixa [codigo=" + caixa.getCodigo() + ", descricao=" + caixa.getDescricao() + "]";
         assertEquals(expected, caixa.toString());
     }
-} 
+}

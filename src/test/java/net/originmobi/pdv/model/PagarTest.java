@@ -1,11 +1,14 @@
 package net.originmobi.pdv.model;
 
-import static org.junit.Assert.*;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.jupiter.api.DisplayName;
-
 import java.time.LocalDate;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 @DisplayName("Classe para teste do Pagar")
 public class PagarTest {
@@ -15,25 +18,11 @@ public class PagarTest {
     private Pagar pagar;
     private LocalDate dataCadastro;
 
-    @Before
-    public void setUp() {
-        // Inicializa o fornecedor
-        fornecedor = new Fornecedor();
-        fornecedor.setCodigo(1L);
-        fornecedor.setNome("Fornecedor Teste");
-        fornecedor.setNome_fantasia("Fantasia Teste Ltda");
-        fornecedor.setCnpj("12.345.678/0001-90");
-        fornecedor.setInscricao_estadual("123456789");
-
-        // Inicializa o tipo de pagamento
-        pagarTipo = new PagarTipo();
-        pagarTipo.setCodigo(1L);
-        pagarTipo.setDescricao("Conta de Energia");
-
-        // Data de cadastro
+    @BeforeEach
+    void setUp() {
+        fornecedor = org.mockito.Mockito.mock(Fornecedor.class);
+        pagarTipo = org.mockito.Mockito.mock(PagarTipo.class);
         dataCadastro = LocalDate.now();
-
-        // Inicializa o objeto Pagar
         pagar = new Pagar(
             "Pagamento de energia elétrica",
             500.0,
@@ -49,8 +38,8 @@ public class PagarTest {
         assertEquals("Pagamento de energia elétrica", pagar.getObservacao());
         assertEquals(Double.valueOf(500.0), pagar.getValor_total());
         assertEquals(dataCadastro, pagar.getData_cadastro());
-        assertEquals(fornecedor, pagar.getFornecedor());
-        assertEquals(pagarTipo, pagar.getTipo());
+        assertSame(fornecedor, pagar.getFornecedor());
+        assertSame(pagarTipo, pagar.getTipo());
     }
 
     @DisplayName("Teste para verificar se o construtor padrão funciona")
@@ -95,29 +84,25 @@ public class PagarTest {
     @DisplayName("Teste para verificar se os getters e setters do fornecedor funcionam")
     @Test
     public void testGetSetFornecedor() {
-        Fornecedor novoFornecedor = new Fornecedor();
-        novoFornecedor.setCodigo(2L);
-        novoFornecedor.setNome("Novo Fornecedor");
+        Fornecedor novoFornecedor = org.mockito.Mockito.mock(Fornecedor.class);
         pagar.setFornecedor(novoFornecedor);
-        assertEquals(novoFornecedor, pagar.getFornecedor());
+        assertSame(novoFornecedor, pagar.getFornecedor());
     }
 
     @DisplayName("Teste para verificar se os getters e setters do tipo de pagamento funcionam")
     @Test
     public void testGetSetTipo() {
-        PagarTipo novoTipo = new PagarTipo();
-        novoTipo.setCodigo(2L);
-        novoTipo.setDescricao("Conta de Água");
+        PagarTipo novoTipo = org.mockito.Mockito.mock(PagarTipo.class);
         pagar.setTipo(novoTipo);
-        assertEquals(novoTipo, pagar.getTipo());
+        assertSame(novoTipo, pagar.getTipo());
     }
 
     @DisplayName("Teste para verificar as anotações de validação")
     @Test
     public void testValidacoes() {
-        assertNotNull("Valor total não pode ser nulo", pagar.getValor_total());
-        assertNotNull("Data de cadastro não pode ser nula", pagar.getData_cadastro());
-        assertTrue("Observação não pode ter mais de 255 caracteres", 
-            pagar.getObservacao() == null || pagar.getObservacao().length() <= 255);
+        assertNotNull(pagar.getValor_total(), "Valor total não pode ser nulo");
+        assertNotNull(pagar.getData_cadastro(), "Data de cadastro não pode ser nula");
+        assertTrue(pagar.getObservacao() == null || pagar.getObservacao().length() <= 255,
+            "Observação não pode ter mais de 255 caracteres");
     }
 }

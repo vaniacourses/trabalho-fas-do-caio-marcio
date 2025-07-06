@@ -1,10 +1,11 @@
 package net.originmobi.pdv.model;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.sql.Date;
 import java.util.Calendar;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -90,25 +91,25 @@ public class ProdutoTest {
     @Test
     @DisplayName("Teste dos getters e setters do fornecedor")
     void testFornecedor() {
-        Fornecedor fornecedor = new Fornecedor();
+        Fornecedor fornecedor = org.mockito.Mockito.mock(Fornecedor.class);
         produto.setFornecedor(fornecedor);
-        assertEquals(fornecedor, produto.getFornecedor(), "O fornecedor deve ser igual ao setado");
+        assertSame(fornecedor, produto.getFornecedor(), "O fornecedor deve ser igual ao setado");
     }
 
     @Test
     @DisplayName("Teste dos getters e setters do grupo")
     void testGrupo() {
-        Grupo grupo = new Grupo();
+        Grupo grupo = org.mockito.Mockito.mock(Grupo.class);
         produto.setGrupo(grupo);
-        assertEquals(grupo, produto.getGrupo(), "O grupo deve ser igual ao setado");
+        assertSame(grupo, produto.getGrupo(), "O grupo deve ser igual ao setado");
     }
 
     @Test
     @DisplayName("Teste dos getters e setters da categoria")
     void testCategoria() {
-        Categoria categoria = new Categoria();
+        Categoria categoria = org.mockito.Mockito.mock(Categoria.class);
         produto.setCategoria(categoria);
-        assertEquals(categoria, produto.getCategoria(), "A categoria deve ser igual à setada");
+        assertSame(categoria, produto.getCategoria(), "A categoria deve ser igual à setada");
     }
 
     @Test
@@ -145,17 +146,17 @@ public class ProdutoTest {
     @Test
     @DisplayName("Teste dos getters e setters da tributação")
     void testTributacao() {
-        Tributacao tributacao = new Tributacao();
+        Tributacao tributacao = org.mockito.Mockito.mock(Tributacao.class);
         produto.setTributacao(tributacao);
-        assertEquals(tributacao, produto.getTributacao(), "A tributação deve ser igual à setada");
+        assertSame(tributacao, produto.getTributacao(), "A tributação deve ser igual à setada");
     }
 
     @Test
     @DisplayName("Teste dos getters e setters do modBcIcms")
     void testModBcIcms() {
-        ModBcIcms modBcIcms = new ModBcIcms();
+        ModBcIcms modBcIcms = org.mockito.Mockito.mock(ModBcIcms.class);
         produto.setModBcIcms(modBcIcms);
-        assertEquals(modBcIcms, produto.getModBcIcms(), "O modBcIcms deve ser igual ao setado");
+        assertSame(modBcIcms, produto.getModBcIcms(), "O modBcIcms deve ser igual ao setado");
     }
 
     @Test
@@ -168,9 +169,9 @@ public class ProdutoTest {
     @Test
     @DisplayName("Teste dos getters e setters do estoque")
     void testEstoque() {
-        ProdutoEstoque estoque = new ProdutoEstoque();
+        ProdutoEstoque estoque = org.mockito.Mockito.mock(ProdutoEstoque.class);
         produto.setEstoque(estoque);
-        assertEquals(estoque, produto.getEstoque(), "O estoque deve ser igual ao setado");
+        assertSame(estoque, produto.getEstoque(), "O estoque deve ser igual ao setado");
     }
 
     @Test
