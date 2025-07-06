@@ -28,7 +28,6 @@ class TributacaoRegraTest {
 
     @Test
     void testSetAndGetTipo() {
-        // Não é possível mockar enums com Mockito, usar valor real
         regra.setTipo(net.originmobi.pdv.enumerado.EntradaSaida.ENTRADA);
         assertEquals(net.originmobi.pdv.enumerado.EntradaSaida.ENTRADA, regra.getTipo());
     }
