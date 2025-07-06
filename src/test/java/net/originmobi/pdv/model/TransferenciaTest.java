@@ -18,14 +18,9 @@ public class TransferenciaTest {
 
     @BeforeEach
     void setUp() {
-        origem = new Caixa();
-        origem.setCodigo(1L);
-
-        destino = new Caixa();
-        destino.setCodigo(2L);
-
-        usuario = new Usuario();
-        usuario.setCodigo(10L);
+        origem = org.mockito.Mockito.mock(Caixa.class);
+        destino = org.mockito.Mockito.mock(Caixa.class);
+        usuario = org.mockito.Mockito.mock(Usuario.class);
 
         transferencia = new Transferencia(
                 150.75,
@@ -42,9 +37,9 @@ public class TransferenciaTest {
     void testConstrutorComParametros() {
         assertEquals(150.75, transferencia.getValor(), 0.001);
         assertNotNull(transferencia.getData_transferencia());
-        assertEquals(origem, transferencia.getOrigem());
-        assertEquals(destino, transferencia.getDestino());
-        assertEquals(usuario, transferencia.getUsuario());
+        assertSame(origem, transferencia.getOrigem());
+        assertSame(destino, transferencia.getDestino());
+        assertSame(usuario, transferencia.getUsuario());
         assertEquals("Transferência teste", transferencia.getObservacao());
     }
 
@@ -65,15 +60,9 @@ public class TransferenciaTest {
     @Test
     @DisplayName("Teste dos getters e setters")
     void testSettersAndGetters() {
-        Caixa novaOrigem = new Caixa();
-        novaOrigem.setCodigo(3L);
-
-        Caixa novoDestino = new Caixa();
-        novoDestino.setCodigo(4L);
-
-        Usuario novoUsuario = new Usuario();
-        novoUsuario.setCodigo(20L);
-
+        Caixa novaOrigem = org.mockito.Mockito.mock(Caixa.class);
+        Caixa novoDestino = org.mockito.Mockito.mock(Caixa.class);
+        Usuario novoUsuario = org.mockito.Mockito.mock(Usuario.class);
         Timestamp now = new Timestamp(System.currentTimeMillis());
 
         transferencia.setCodigo(5L);
@@ -87,9 +76,9 @@ public class TransferenciaTest {
         assertEquals(Long.valueOf(5L), transferencia.getCodigo());
         assertEquals(300.00, transferencia.getValor(), 0.001);
         assertEquals(now, transferencia.getData_transferencia());
-        assertEquals(novaOrigem, transferencia.getOrigem());
-        assertEquals(novoDestino, transferencia.getDestino());
-        assertEquals(novoUsuario, transferencia.getUsuario());
+        assertSame(novaOrigem, transferencia.getOrigem());
+        assertSame(novoDestino, transferencia.getDestino());
+        assertSame(novoUsuario, transferencia.getUsuario());
         assertEquals("Alteração na transferência", transferencia.getObservacao());
     }
 }
