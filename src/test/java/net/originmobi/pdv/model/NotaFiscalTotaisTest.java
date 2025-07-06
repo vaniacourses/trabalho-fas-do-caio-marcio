@@ -9,7 +9,7 @@ class NotaFiscalTotaisTest {
 
     @BeforeEach
     void setUp() {
-        totais = new NotaFiscalTotais();
+        totais = new NotaFiscalTotais(0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d);
     }
 
     @Test
@@ -18,11 +18,7 @@ class NotaFiscalTotaisTest {
         assertEquals(123.45, totais.getV_prod(), 0.0001);
     }
 
-    @Test
-    void testSetAndGetVDesc() {
-        totais.setV_desc(10.0);
-        assertEquals(10.0, totais.getV_desc(), 0.0001);
-    }
+    // ...existing code...
 
     @Test
     void testSetAndGetVFrete() {
@@ -34,5 +30,11 @@ class NotaFiscalTotaisTest {
     void testSetAndGetVSeg() {
         totais.setV_seg(2.0);
         assertEquals(2.0, totais.getV_seg(), 0.0001);
+    }
+
+    @Test
+    void testSetAndGetVDesc() {
+        totais.setV_desc(10.0);
+        assertEquals(10.0, totais.getV_desc(), 0.0001);
     }
 }
