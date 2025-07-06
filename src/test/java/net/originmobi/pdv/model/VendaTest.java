@@ -1,3 +1,10 @@
+
+
+
+
+
+
+
 package net.originmobi.pdv.model;
 
 import net.originmobi.pdv.enumerado.VendaSituacao;
@@ -21,9 +28,8 @@ public class VendaTest {
     @BeforeEach
     void inicializa() {
         agora = new Timestamp(System.currentTimeMillis());
-        pessoa = new Pessoa();
-        usuario = new Usuario();
-
+        pessoa = org.mockito.Mockito.mock(Pessoa.class);
+        usuario = org.mockito.Mockito.mock(Usuario.class);
         venda = new Venda(
                 "Teste de observação",
                 100.00,
@@ -51,9 +57,10 @@ public class VendaTest {
         assertEquals(agora, venda.getData_cadastro());
         assertNull(venda.getData_finalizado());
         assertNull(venda.getData_cancelado());
-        assertEquals(pessoa, venda.getPessoa());
-        assertEquals(usuario, venda.getUsuario());
+        assertSame(pessoa, venda.getPessoa());
+        assertSame(usuario, venda.getUsuario());
     }
+
 
     @DisplayName("Teste para verificar se os setters funcionam corretamente")
     @Test
@@ -73,6 +80,7 @@ public class VendaTest {
         assertEquals(VendaSituacao.CANCELADA, venda.getSituacao());
     }
 
+
     @DisplayName("Teste para verificar se a venda está aberta")
     @Test
     void testIsAberta() {
@@ -83,11 +91,12 @@ public class VendaTest {
         assertFalse(venda.isAberta());
     }
 
+
     @DisplayName("Teste para verificar associação com produtos")
     @Test
     void testAssociacaoComProdutos() {
-        Produto produto = new Produto();
-        produto.setDescricao("Produto Teste");
+        Produto produto = org.mockito.Mockito.mock(Produto.class);
+        org.mockito.Mockito.when(produto.getDescricao()).thenReturn("Produto Teste");
         venda.setProduto(Collections.singletonList(produto));
 
         assertNotNull(venda.getProduto());
@@ -95,12 +104,13 @@ public class VendaTest {
         assertEquals("Produto Teste", venda.getProduto().get(0).getDescricao());
     }
 
+
     @DisplayName("Teste para verificar associação com tipo de pagamento")
     @Test
     void testSetGetPagamentoTipo() {
-        PagamentoTipo pagamentoTipo = new PagamentoTipo();
+        PagamentoTipo pagamentoTipo = org.mockito.Mockito.mock(PagamentoTipo.class);
         venda.setPagamentotipo(pagamentoTipo);
 
-        assertEquals(pagamentoTipo, venda.getPagamentotipo());
+        assertSame(pagamentoTipo, venda.getPagamentotipo());
     }
 }
