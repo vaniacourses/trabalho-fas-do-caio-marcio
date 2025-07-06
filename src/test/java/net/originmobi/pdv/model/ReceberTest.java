@@ -1,12 +1,12 @@
 package net.originmobi.pdv.model;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.Timestamp;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 @DisplayName("Classe para teste de Receber")
 public class ReceberTest {
@@ -15,14 +15,10 @@ public class ReceberTest {
     private Pessoa pessoa;
     private Venda venda;
 
-    @Before
-    public void setUp() {
-        pessoa = new Pessoa();
-        pessoa.setCodigo(1L);
-
-        venda = new Venda();
-        venda.setCodigo(100L);
-
+    @BeforeEach
+    void setUp() {
+        pessoa = org.mockito.Mockito.mock(Pessoa.class);
+        venda = org.mockito.Mockito.mock(Venda.class);
         receber = new Receber(
                 "Pagamento parcial",
                 250.00,
@@ -37,20 +33,16 @@ public class ReceberTest {
     public void testConstrutorComParametros() {
         assertEquals("Pagamento parcial", receber.getObservacao());
         assertEquals(250.00, receber.getValor_total(), 0.001);
-        assertEquals(pessoa, receber.getPessoa());
+        assertSame(pessoa, receber.getPessoa());
         assertNotNull(receber.getData_cadastro());
-        assertEquals(venda, receber.getVenda());
+        assertSame(venda, receber.getVenda());
     }
 
     @Test
     @DisplayName("Teste dos getters e setters")
     public void testSettersAndGetters() {
-        Pessoa novaPessoa = new Pessoa();
-        novaPessoa.setCodigo(2L);
-
-        Venda novaVenda = new Venda();
-        novaVenda.setCodigo(200L);
-
+        Pessoa novaPessoa = org.mockito.Mockito.mock(Pessoa.class);
+        Venda novaVenda = org.mockito.Mockito.mock(Venda.class);
         Timestamp now = new Timestamp(System.currentTimeMillis());
 
         receber.setCodigo(5L);
@@ -63,9 +55,9 @@ public class ReceberTest {
         assertEquals(Long.valueOf(5L), receber.getCodigo());
         assertEquals("Outro pagamento", receber.getObservacao());
         assertEquals(400.00, receber.getValor_total(), 0.001);
-        assertEquals(novaPessoa, receber.getPessoa());
+        assertSame(novaPessoa, receber.getPessoa());
         assertEquals(now, receber.getData_cadastro());
-        assertEquals(novaVenda, receber.getVenda());
+        assertSame(novaVenda, receber.getVenda());
     }
 
     @Test
