@@ -76,7 +76,6 @@ public class ProdutoServiceStructuralTest {
                                          any(), anyString(), anyString(), anyLong(), 
                                          anyLong(), anyString());
 
-        // Act
         String resultado = produtoService.merger(codprod, 1L, 1L, 1L, 0, "Produto Teste",
                                                 10.0, 15.0, new java.util.Date(), "SIM", "ATIVO",
                                                 "UN", ProdutoSubstTributaria.NAO, "12345678", 
@@ -89,8 +88,6 @@ public class ProdutoServiceStructuralTest {
                                any(), anyString(), anyString(), anyLong(), 
                                anyLong(), anyString());
         
-        System.out.println("✅ ARESTA EXECUTADA: codprod == 0 → try (inserção)");
-        System.out.println();
     }
 
     @Test
@@ -157,9 +154,6 @@ public class ProdutoServiceStructuralTest {
 
     @Test
     public void testMovimentaEstoqueComEstoqueSuficiente() {
-        System.out.println("=== TESTE ESTRUTURAL: movimentaEstoque() - Estoque Suficiente ===");
-        System.out.println("CRITÉRIO: Todas-Arestas - For loop com estoque suficiente");
-        System.out.println("ARESTA: for loop → if (controla_estoque == SIM) → if (qtd <= qtd_estoque)");
         
         Long codvenda = 1L;
         List<Object[]> resultado = new ArrayList<>();
@@ -177,9 +171,6 @@ public class ProdutoServiceStructuralTest {
 
     @Test
     public void testMovimentaEstoqueProdutoNaoControlaEstoque() {
-        System.out.println("=== TESTE ESTRUTURAL: movimentaEstoque() - Não Controla Estoque ===");
-        System.out.println("CRITÉRIO: Todas-Arestas - For loop com produto que não controla estoque");
-        System.out.println("ARESTA: for loop → if (controla_estoque == SIM) → else (não controla estoque)");
         
         Long codvenda = 1L;
         Produto produtoSemEstoque = new Produto();
@@ -199,9 +190,6 @@ public class ProdutoServiceStructuralTest {
 
     @Test(expected = RuntimeException.class)
     public void testMovimentaEstoqueEstoqueInsuficiente() {
-        System.out.println("=== TESTE ESTRUTURAL: movimentaEstoque() - Estoque Insuficiente ===");
-        System.out.println("CRITÉRIO: Todas-Arestas - For loop com estoque insuficiente");
-        System.out.println("ARESTA: for loop → if (controla_estoque == SIM) → if (qtd <= qtd_estoque) → else (estoque insuficiente)");
         
         Long codvenda = 1L;
         List<Object[]> resultado = new ArrayList<>();
@@ -216,9 +204,6 @@ public class ProdutoServiceStructuralTest {
 
     @Test
     public void testMovimentaEstoqueVendaSemProdutos() {
-        System.out.println("=== TESTE ESTRUTURAL: movimentaEstoque() - Venda Sem Produtos ===");
-        System.out.println("CRITÉRIO: Todas-Arestas - For loop vazio");
-        System.out.println("ARESTA: for loop (resultado.size() == 0)");
         
         Long codvenda = 1L;
         List<Object[]> resultado = new ArrayList<>(); // Lista vazia
@@ -247,9 +232,6 @@ public class ProdutoServiceStructuralTest {
 
     @Test
     public void testAjusteEstoqueProdutoControlaEstoque() {
-        System.out.println("=== TESTE ESTRUTURAL: ajusteEstoque() - Controla Estoque ===");
-        System.out.println("CRITÉRIO: Todas-Arestas - Ramo falso if (controla_estoque == NAO)");
-        System.out.println("ARESTA: if (controla_estoque == NAO) → else (controla estoque)");
         
         Long codprod = 1L;
         when(produtos.findByCodigoIn(codprod)).thenReturn(produto);
@@ -263,9 +245,6 @@ public class ProdutoServiceStructuralTest {
 
     @Test
     public void testFilterDescricaoNula() {
-        System.out.println("=== TESTE ESTRUTURAL: filter() - Descrição Nula ===");
-        System.out.println("CRITÉRIO: Todas-Arestas - Ramo verdadeiro if (descrição == null)");
-        System.out.println("ARESTA: if (filter.getDescricao() == null) → \"%\"");
         
         ProdutoFilter filter = new ProdutoFilter();
         filter.setDescricao(null); // Ramo verdadeiro do if
@@ -342,9 +321,6 @@ public class ProdutoServiceStructuralTest {
 
     @Test
     public void testBuscaProduto() {
-        System.out.println("=== TESTE ESTRUTURAL: buscaProduto() ===");
-        System.out.println("CRITÉRIO: Todas-Arestas - Método simples");
-        System.out.println("ARESTA: return produtos.findById(codigo)");
         
         Long codigo = 1L;
         when(produtos.findById(codigo)).thenReturn(Optional.of(produto));
