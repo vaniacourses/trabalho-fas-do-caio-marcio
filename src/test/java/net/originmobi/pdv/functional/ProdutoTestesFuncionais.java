@@ -13,8 +13,6 @@ public class ProdutoTestesFuncionais {
     
     @Test
     public void testParticionamentoClassesEquivalenciaDescricao() {
-        System.out.println("=== TESTE: PARTICIONAMENTO EM CLASSES DE EQUIVALÊNCIA ===");
-        System.out.println("Testando validação da descrição do produto");
         
         String descricaoValida = "Produto Teste Válido";
         assertTrue("Descrição válida deve ser aceita", 
@@ -122,7 +120,6 @@ public class ProdutoTestesFuncionais {
     }
     
     private boolean validarRelacaoValores(Double valorCusto, Double valorVenda) {
-        // Validação de valores monetários
         if (valorCusto == null || valorVenda == null) {
             return false;
         }
