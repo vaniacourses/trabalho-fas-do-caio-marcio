@@ -4,9 +4,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
-// Classes do seu modelo que serão usadas no teste
 import net.originmobi.pdv.model.Caixa;
-import net.originmobi.pdv.model.Transferencia;
 
 public class TransferenciaFunctionalTest {
 
