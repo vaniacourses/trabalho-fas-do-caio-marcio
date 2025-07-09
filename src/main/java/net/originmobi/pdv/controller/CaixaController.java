@@ -111,14 +111,20 @@ public class CaixaController {
 		String retorno = "";
 
 		try {
-			Optional<Caixa> caixa = caixas.busca(codCaixa);
+			Optional<Caixa> caixaOptional = caixas.busca(codCaixa);
 			Aplicacao aplicacao = Aplicacao.getInstancia();
 			Usuario usuario = usuarios.buscaUsuario(aplicacao.getUsuarioAtual());
 
-			CaixaLancamento lancamento = new CaixaLancamento(observacao, valor, TipoLancamento.SUPRIMENTO,
-					EstiloLancamento.ENTRADA, caixa.get(), usuario);
+			if (caixaOptional.isPresent()) {
+				Caixa caixa = caixaOptional.get();
 
-			retorno = lancamentos.lancamento(lancamento);
+				CaixaLancamento lancamento = new CaixaLancamento(observacao, valor, TipoLancamento.SUPRIMENTO,
+						EstiloLancamento.ENTRADA, caixa, usuario);
+				retorno = lancamentos.lancamento(lancamento);
+			} else {
+				throw new IllegalArgumentException("Caixa com código " + codCaixa + " não encontrada.");
+			}
+
 		} catch (Exception e) {
 			e.getStackTrace();
 		}
