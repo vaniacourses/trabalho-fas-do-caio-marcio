@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -39,6 +41,8 @@ import net.originmobi.pdv.service.VendaService;
 @Controller
 @RequestMapping("/venda")
 public class VendaController {
+
+	private static final Logger logger = LoggerFactory.getLogger(VendaController.class);
 
 	private static final String VENDA_LIST = "venda/list";
 
@@ -89,23 +93,24 @@ public class VendaController {
 		return mv;
 	}
 
-	@PostMapping
-	public String abrirVenda(@Validated Venda venda, Errors errors, RedirectAttributes attributes) {
-		if (errors.hasErrors())
-			return VENDA_FORM;
+    @PostMapping
+    public String abrirVenda(@Validated Venda venda, Errors errors, RedirectAttributes attributes) {
+        if (errors.hasErrors())
+            return VENDA_FORM;
 
-		Long codigo = null;
+        Long codigo; 
 
-		try {
-			codigo = vendas.abreVenda(venda);
-			attributes.addFlashAttribute("mensagem", "Pedido Salvo");
-		} catch (Exception e) {
-			e.getStackTrace();
-		}
+        try {
+            codigo = vendas.abreVenda(venda);
+            attributes.addFlashAttribute("mensagem", "Pedido Salvo");
 
-		return "redirect:/venda/" + codigo.toString();
-
-	}
+            return "redirect:/venda/" + codigo.toString(); 
+        } catch (Exception e) {
+            logger.error("Erro ao abrir venda: {}", e.getMessage(), e);
+            attributes.addFlashAttribute("mensagem", "Erro ao salvar pedido: " + e.getMessage());
+            return VENDA_FORM;
+        }
+    }
 
 	@GetMapping("{codigo}")
 	public ModelAndView buscaVenda(@PathVariable("codigo") Venda venda) {
