@@ -77,7 +77,12 @@ public class NotaFiscalController {
 		String natureza = request.get("natureza_operacao");
 		String tipo = request.get("tipo");
 		
-		NotaFiscalTipo notaTipo = tipo.equals(NotaFiscalTipo.ENTRADA) ? NotaFiscalTipo.ENTRADA : NotaFiscalTipo.SAIDA;
+		NotaFiscalTipo notaTipo;
+		try {
+			notaTipo = NotaFiscalTipo.valueOf(tipo);
+		} catch (IllegalArgumentException | NullPointerException e) {
+			notaTipo = NotaFiscalTipo.SAIDA; // correção para erro relatado no sonar
+		}
 
 		String codigo = null;
 		codigo = notasFiscais.cadastrar(coddesti, natureza, notaTipo);
