@@ -7,9 +7,12 @@ git clone https://github.com/vaniacourses/trabalho-fas-do-caio-marcio.git
 
 2.1. Conecte-se à sua instância do MySQL com um cliente de sua preferência e execute o script abaixo: 
 
-CREATE DATABASE IF NOT EXISTS pdv CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-CREATE USER IF NOT EXISTS 'pdv'@'localhost' IDENTIFIED BY 'kate456';
+DROP USER IF EXISTS 'pdv'@'localhost';
+DROP DATABASE IF EXISTS pdv;
+CREATE DATABASE pdv CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE USER 'pdv'@'localhost' IDENTIFIED BY '123456';
 GRANT ALL PRIVILEGES ON pdv.* TO 'pdv'@'localhost';
+GRANT SUPER ON *.* TO 'pdv'@'localhost';
 FLUSH PRIVILEGES;
 
 OBS: o passo anterior substitui os comandos do arquivo README.txt
