@@ -1,0 +1,6 @@
+projectKey=trabalho-fas-caio-marcio
+serverUrl=http://localhost:9000
+serverVersion=25.7.0.110598
+dashboardUrl=http://localhost:9000/dashboard?id=trabalho-fas-caio-marcio
+ceTaskId=60224364-b2a7-4cd3-926d-18f80043d3aa
+ceTaskUrl=http://localhost:9000/api/ce/task?id=60224364-b2a7-4cd3-926d-18f80043d3aa
