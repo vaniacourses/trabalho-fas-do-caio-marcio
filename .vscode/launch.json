@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "ProdutoTestesFuncionais",
+            "request": "launch",
+            "mainClass": "net.originmobi.pdv.functional.ProdutoTestesFuncionais",
+            "projectName": "pdv"
+        },
+        {
+            "type": "java",
             "name": "Spring Boot-PdvApplication<pdv>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
