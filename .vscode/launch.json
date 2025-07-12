@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "UsuarioTestesFuncionais",
+            "request": "launch",
+            "mainClass": "net.originmobi.pdv.functional.UsuarioTestesFuncionais",
+            "projectName": "pdv"
+        },
+        {
+            "type": "java",
             "name": "ProdutoTestesFuncionais",
             "request": "launch",
             "mainClass": "net.originmobi.pdv.functional.ProdutoTestesFuncionais",
