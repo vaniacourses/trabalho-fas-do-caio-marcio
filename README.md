@@ -3,8 +3,9 @@ Sistema de ERP web desenvolvido em Java com Spring Framework
 
 # Entregas
  - Plano de testes: https://docs.google.com/document/d/16-GRfiF10-xN9RDf08mdy_ajifYkAQ5e/edit
- - Casos de testes: https://docs.google.com/spreadsheets/d/1rlLs6sKpDeE7iWGcPT-HcteD6nry4qia/edit?usp=sharing&ouid=117254869348586751712&rtpof=true&sd=true
+ - Casos de testes: https://docs.google.com/spreadsheets/d/1rlLs6sKpDeE7iWGcPT-HcteD6nry4qia/edit
  - Imagens Sonar: pasta "sonar_images" no repositório
+ - Imagens PITest: pasta "evidencias_testes/mutation_images" no repositório
  - ISO: https://g.co/gemini/share/02bbad3f0b60
 
 # Recursos
