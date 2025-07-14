@@ -7,6 +7,7 @@ Sistema de ERP web desenvolvido em Java com Spring Framework
  - Imagens Sonar: pasta "sonar_images" no repositório
  - Imagens PITest: pasta "evidencias_testes/mutation_images" no repositório
  - ISO: https://g.co/gemini/share/02bbad3f0b60
+ - Score Prints https://docs.google.com/document/d/1caCIoMR5diqkhQGeW-cCFvNl0pTCMrD3YypvbRggY7M/edit?usp=sharing
 
 # Recursos
 - Cadastro produtos/clientes/fornecedor
